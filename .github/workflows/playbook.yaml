@@ -16,6 +16,8 @@ jobs:
       fail-fast: false
     runs-on: ${{ matrix.os }}
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
       - name: Run Ansible Playbook
         run: |  
           cat site.yaml
