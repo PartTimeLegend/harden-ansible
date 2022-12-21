@@ -20,7 +20,7 @@ jobs:
       - name: Run playbook
         uses: dawidd6/action-ansible-playbook@v2
         with:
-          playbook: site.yml
+          playbook: site.yaml
           directory: ./
           options: |
             --check
