@@ -17,9 +17,5 @@ jobs:
       fail-fast: false
     runs-on: ${{ matrix.os }}
     steps:
-      - name: Run playbook
-        uses: dawidd6/action-ansible-playbook@v2
-        with:
-          playbook: site.yaml
-          options: |
-            --check
+      - name: Run Ansible Playbook
+        run: ansible-playbook site.yaml
