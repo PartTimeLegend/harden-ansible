@@ -1,0 +1,8 @@
+- hosts: all
+  tasks:
+    - import_tasks: tasks/update_system.yaml
+    - import_tasks: tasks/toor.yaml
+    - import_tasks: tasks/sshd.yaml
+    - import_tasks: tasks/firewalld.yaml
+    - import_tasks: tasks/remove_unused.yaml
+    - import_tasks: tasks/reboot.yaml

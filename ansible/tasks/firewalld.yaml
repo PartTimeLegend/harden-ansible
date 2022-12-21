@@ -1,0 +1,34 @@
+- name: Import services
+  ansible.builtin.include_vars:
+    file: ../vars/services.yaml
+    name: services
+
+- name: Import ssh networks
+  ansible.builtin.include_vars:
+    file: ../vars/ssh_networks.yaml
+    name: ssh_networks
+
+- name: Add SSH port to internal zone
+  firewalld:
+    zone: internal
+    service: ssh
+    state: enabled
+    immediate: yes
+    permanent: yes
+
+- name: Add networks to internal zone
+  firewalld:
+    zone: internal
+    source: "{{ services.services }}"
+    state: enabled
+    immediate: yes
+    permanent: yes
+  with_items: "{{ ssh_networks.ssh_networks }}"
+
+- name: Drop ssh from the public zone
+  firewalld:
+    zone: public
+    service: ssh
+    state: disabled
+    immediate: yes
+    permanent: yes

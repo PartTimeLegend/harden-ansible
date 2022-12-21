@@ -1,0 +1,21 @@
+- name: Import services
+  ansible.builtin.include_vars:
+    file: ../vars/services.yaml
+    name: services
+
+- name: Import software
+  ansible.builtin.include_vars:
+    file: ../vars/software.yaml
+    name: software
+
+- name: Stop services
+  service:
+    name: "{{ item }}"
+    state: stopped
+    enabled: no
+  with_items: "{{ services.services }}"
+
+- name: Remove software packages
+  package:
+    name: "{{ software.software }}"
+    state: absent
